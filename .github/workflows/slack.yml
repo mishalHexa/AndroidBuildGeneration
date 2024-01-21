@@ -1,4 +1,4 @@
-name: Android CI
+name: SLACK 
 
 on:
   workflow_dispatch:
