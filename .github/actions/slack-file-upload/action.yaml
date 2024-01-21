@@ -1,0 +1,36 @@
+name: 'Slack File Upload'
+branding:
+  icon: file
+  color: red
+description: 'Uploads file to slack'
+inputs:
+  path:  # id of input
+    description: 'Path to file'
+    required: true
+  token:
+    description: 'Slack token'
+    required: true
+  channel:
+    description: 'Slack channels'
+    required: false
+  filename:
+    description: 'Filename of file'
+    required: false
+  filetype:
+    description: 'A file type identifier.'
+    required: false
+  initial_comment:
+    description: 'The message text introducing the file in specified channels.'
+    required: false
+  title:
+    description: 'Title of file'
+    required: false
+  thread_ts:
+    description: 'The timestamp on the message that was posted into Slack when using bot token'
+    required: false
+outputs:
+  result:
+    description: "response from slack"
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
