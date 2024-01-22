@@ -58,7 +58,7 @@ runs:
   steps:
     - name: Send Slack Message
       id: send-message
-      uses: ./.github/actions/slack-message-send
+      uses: slackapi/slack-github-action@v1.24.0
       with:
         # The following message update step does not accept a channel name.
         # Setting a channel ID here for consistency is highly recommended.
