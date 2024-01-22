@@ -1,0 +1,24 @@
+{
+  "name": "slack-notify",
+  "version": "1.0.0",
+  "description": "Slack Notification",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mishalHexa/slack-notify.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mishalHexa/slack-notify/issues"
+  },
+  "homepage": "https://github.com/mishalHexa/slack-notify#readme",
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/exec": "^1.1.1"
+  }
+}

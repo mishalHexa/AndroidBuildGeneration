@@ -1,0 +1,4 @@
+node_modules/**
+package-lock.json
+dist
+.github/actions/slack-file-upload/package-lock.json

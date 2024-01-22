@@ -10,3 +10,4 @@ app/.gitignore
 captures
 .externalNativeBuild
 .cxx
+.github/actions/slack-file-upload/package-lock.json
