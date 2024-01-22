@@ -37,6 +37,7 @@ runs:
         # The following message update step does not accept a channel name.
         # Setting a channel ID here for consistency is highly recommended.
         channel-id: "C01HLUS0S8K"
+        SLACK_TOKEN: ${{ inputs.SLACK_TOKEN}}
         payload: |
           {
             "text": "Build1 Generated Successfully.",
