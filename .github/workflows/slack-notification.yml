@@ -32,7 +32,7 @@ jobs:
 
       - name: Send Slack Notification
         id: slack-message
-        uses: mishalHexa/slack-notify
+        uses: mishalHexa/slack-notify@master
         with:
           # The following message update step does not accept a channel name.
           # Setting a channel ID here for consistency is highly recommended.
