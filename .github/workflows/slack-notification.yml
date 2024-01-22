@@ -29,11 +29,6 @@ jobs:
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
         
-      - name: Send Release Apk to Slack
-        uses: ./.github/actions/slack-file-upload
-        with:
-          token: ${{ secrets.SLACK_TOKEN }}
-          
 
       - name: Send Slack Notification
         id: slack-message
