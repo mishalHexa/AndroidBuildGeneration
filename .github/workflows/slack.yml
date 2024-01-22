@@ -31,7 +31,7 @@ jobs:
         
       - name: Send GitHub trigger using slack bot
         id: slack
-        uses: ./.github/actions/slack-send
+        uses: ./.github/actions/slack-message-send
         with:
           # The following message update step does not accept a channel name.
           # Setting a channel ID here for consistency is highly recommended.
@@ -73,3 +73,26 @@ jobs:
           path: app/build/outputs/apk/release/app-release.apk
           thread_ts: ${{ steps.slack.outputs.ts }}
           channel: application-development
+
+      - name: Send GitHub trigger using slack bot
+        id: slackcustom
+        uses: ./.github/actions/slack-notify
+        with:
+          # The following message update step does not accept a channel name.
+          # Setting a channel ID here for consistency is highly recommended.
+          channel-id: "C01HLUS0S8K"
+          payload: |
+            {
+              "text": "Build Generated Successfully.",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "@here \n *Build Generated Successfully.*"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN}}
