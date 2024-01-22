@@ -81,6 +81,7 @@ jobs:
           # The following message update step does not accept a channel name.
           # Setting a channel ID here for consistency is highly recommended.
           channel-id: "C01HLUS0S8K"
+          SLACK_TOKEN:  ${{ secrets.SLACK_TOKEN}}
           payload: |
             {
               "text": "Build Generated Successfully.",
@@ -94,5 +95,3 @@ jobs:
                 }
               ]
             }
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN}}
