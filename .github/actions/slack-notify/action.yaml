@@ -62,20 +62,8 @@ runs:
       with:
         # The following message update step does not accept a channel name.
         # Setting a channel ID here for consistency is highly recommended.
-        channel-id: "C01HLUS0S8K"
-        payload: |
-          {
-            "text": "Build Generated Successfully.",
-            "blocks": [
-              {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "@here \n *Build Generated Successfully.*"
-                }
-              }
-            ]
-          }
+        channel-id: ${{ inputs.channel-id}}
+        payload: ${{ inputs.payload}}
       env:
         SLACK_BOT_TOKEN: ${{ inputs.SLACK_TOKEN}}
 
@@ -84,9 +72,9 @@ runs:
       uses: ./.github/actions/slack-file-upload
       with:
         token: ${{ inputs.SLACK_TOKEN }}
-        initial_comment: "Download Release Signed APK"
-        title: Release APK
-        filetype: apk
-        path: app/build/outputs/apk/release/app-release.apk
+        initial_comment:  ${{ inputs.initial_comment}}
+        title: ${{ inputs.title}}
+        filetype: ${{ inputs.filetype}}
+        path: ${{ inputs.path}}
         thread_ts: ${{ steps.send-message.outputs.ts }}
-        channel: application-development
+        channel: ${{ inputs.channel-id}}
