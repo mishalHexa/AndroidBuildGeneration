@@ -15,7 +15,9 @@ inputs:
     required: false
   update-ts: # The timestamp of a previous message posted to update it instead of posting a new message
     description: 'The timestamp of a previous message posted. It will update the existing message instead of posting a new message'
-    required: false
+  SLACK_TOKEN: # The timestamp of a previous message posted to update it instead of posting a new message
+    description: 'The timestamp of a previous message posted. It will update the existing message instead of posting a new message'
+    required: true
 outputs:
   time: # id of output
     description: 'The time'
@@ -49,4 +51,4 @@ runs:
             ]
           }
       env:
-        SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN}}
+        SLACK_BOT_TOKEN: ${{ inputs.SLACK_TOKEN}}
