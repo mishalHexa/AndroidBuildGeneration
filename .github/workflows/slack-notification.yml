@@ -1,7 +1,9 @@
-name: SLACK 
+name: Slack Notification 
 
 on:
   workflow_dispatch:
+  push:
+    branches: [ "develop" ]
 
 jobs:
   slack_upload_job:
@@ -27,53 +29,14 @@ jobs:
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
         
-      - name: Send GitHub trigger using slack bot
-        id: slack
-        uses: ./.github/actions/slack-message-send
-        with:
-          # The following message update step does not accept a channel name.
-          # Setting a channel ID here for consistency is highly recommended.
-          channel-id: "C01HLUS0S8K"
-          payload: |
-            {
-              "text": "Build Generated Successfully.",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "@here \n *Build Generated Successfully.*"
-                  }
-                }
-              ]
-            }
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN}}
-
-      - name: Send Debug Apk to Slack
-        uses: ./.github/actions/slack-file-upload
-        with:
-          token: ${{ secrets.SLACK_TOKEN }}
-          initial_comment: "Download Debug APK"
-          title: Debug APK
-          filetype: apk
-          thread_ts: ${{ steps.slack.outputs.ts }}
-          path: app/build/outputs/apk/debug/app-debug.apk
-          channel: application-development
-
       - name: Send Release Apk to Slack
         uses: ./.github/actions/slack-file-upload
         with:
           token: ${{ secrets.SLACK_TOKEN }}
-          initial_comment: "Download Release Signed APK"
-          title: Release APK
-          filetype: apk
-          path: app/build/outputs/apk/release/app-release.apk
-          thread_ts: ${{ steps.slack.outputs.ts }}
-          channel: application-development
+          
 
-      - name: Send GitHub trigger using slack bot
-        id: slackcustom
+      - name: Send Slack Notification
+        id: slack-message
         uses: ./.github/actions/slack-notify
         with:
           # The following message update step does not accept a channel name.

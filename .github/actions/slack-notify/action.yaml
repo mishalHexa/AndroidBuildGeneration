@@ -18,6 +18,30 @@ inputs:
   SLACK_TOKEN: # The timestamp of a previous message posted to update it instead of posting a new message
     description: 'The timestamp of a previous message posted. It will update the existing message instead of posting a new message'
     required: true
+  path:  # id of input
+    description: 'Path to file'
+    required: true
+  token:
+    description: 'Slack token'
+    required: true
+  channel:
+    description: 'Slack channels'
+    required: false
+  filename:
+    description: 'Filename of file'
+    required: false
+  filetype:
+    description: 'A file type identifier.'
+    required: false
+  initial_comment:
+    description: 'The message text introducing the file in specified channels.'
+    required: false
+  title:
+    description: 'Title of file'
+    required: false
+  thread_ts:
+    description: 'The timestamp on the message that was posted into Slack when using bot token'
+    required: false
 outputs:
   time: # id of output
     description: 'The time'
@@ -27,17 +51,18 @@ outputs:
     description: 'The timestamp on the message that was posted into Slack when using bot token'
   channel_id: # Id of the channel. If channel name was used as input we can get ID from output for later use when updating message or posting to thread.
     description: 'The channel id of the message that was posted into Slack when using bot token'
+  result:
+    description: "response from slack"
 runs:
   using: "composite"
   steps:
-    - name: Send GitHub trigger using slack bot
-      id: slackmessage
+    - name: Send Slack Message
+      id: send-message
       uses: ./.github/actions/slack-message-send
       with:
         # The following message update step does not accept a channel name.
         # Setting a channel ID here for consistency is highly recommended.
         channel-id: "C01HLUS0S8K"
-        SLACK_TOKEN: ${{ inputs.SLACK_TOKEN}}
         payload: |
           {
             "text": "Build1 Generated Successfully.",
@@ -53,3 +78,15 @@ runs:
           }
       env:
         SLACK_BOT_TOKEN: ${{ inputs.SLACK_TOKEN}}
+
+    - name: Send File
+      id: send-file
+      uses: ./.github/actions/slack-file-upload
+      with:
+        token: ${{ inputs.SLACK_TOKEN }}
+        initial_comment: "Download Release Signed APK"
+        title: Release APK
+        filetype: apk
+        path: app/build/outputs/apk/release/app-release.apk
+        thread_ts: ${{ steps.send-message.outputs.ts }}
+        channel: application-development
