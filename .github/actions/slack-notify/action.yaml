@@ -32,7 +32,7 @@ runs:
   steps:
     - name: Send GitHub trigger using slack bot
       id: slackmessage
-      uses: ../slack-send
+      uses: ./.github/actions/slack-message-send
       with:
         # The following message update step does not accept a channel name.
         # Setting a channel ID here for consistency is highly recommended.
