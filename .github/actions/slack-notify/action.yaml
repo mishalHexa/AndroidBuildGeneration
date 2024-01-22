@@ -65,7 +65,7 @@ runs:
         channel-id: "C01HLUS0S8K"
         payload: |
           {
-            "text": "Build1 Generated Successfully.",
+            "text": "Build Generated Successfully.",
             "blocks": [
               {
                 "type": "section",
